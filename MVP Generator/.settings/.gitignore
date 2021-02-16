@@ -1,7 +1,0 @@
-/bin/
-/test-bin/
-/org.eclipse.jdt.core.prefs
-
-*.class
-*.exe
-*.com
