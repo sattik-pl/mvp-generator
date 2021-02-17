@@ -11,6 +11,10 @@ public final class MyStrings {
 	static String incompletePckg = "Error: incomplete package property.";
 	static String incompleteApp = "Error: incomplete app property.";
 	
+	static String wrongPath = "Error: wrong path.";
+	static String projectNotInitialized = "Error: project not initialized.";
+	static String notEmptyFolders = "Error: folders are not empty.";
+	
 	static String success = "\nMVP generated successfully.\n";
 
 }

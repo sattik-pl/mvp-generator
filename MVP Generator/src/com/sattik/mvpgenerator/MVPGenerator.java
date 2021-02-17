@@ -25,19 +25,16 @@ public class MVPGenerator {
 
 	public static void checkDataCorrectness(List<String> data) {
 		for (String s : data) {
-			if (!s.contains("=")) {
-				System.out.println("Error: \"".concat(s.replace("\r\n", ""))
-				                              .concat("\" does not contain \"=\"."));
-				System.exit(1);
-			}
+			if (!s.contains("="))
+				error("Error: \"".concat(s.replace("\r\n", ""))
+				                 .concat("\" does not contain \"=\"."));
 		}
 	}
 
 	public static Map<String, String> getMapFromList(List<String> data) {
 		return data.stream()
-		           .collect(Collectors.toMap(
-		        		   s -> getStringBeforeEq(s), 
-		        		   s -> getStringAfterEq(s)));
+		           .collect(Collectors.toMap(s -> getStringBeforeEq(s), 
+		                                     s -> getStringAfterEq(s)));
 	}
 	
 	public static String getStringBeforeEq(String s) {
@@ -69,6 +66,7 @@ public class MVPGenerator {
 		checkIfEmpty(app, incompleteApp);
 		if (!endsWithSlash(path)) { path += "\\"; }
 		app = startWithUpperCase(app);
+		checkProject(path);
 		
 		String srcFolder = path.concat("src").concat(packagePath);
 		
@@ -90,7 +88,18 @@ public class MVPGenerator {
 	}
 
 	public static void checkIfEmpty(String s, String error) {
-		if (s.isEmpty()) { System.out.println(error); System.exit(1); }
+		if (s.isEmpty()) { error(error); }
+	}
+
+	public static void checkProject(String path) {
+		File file = new File(path);
+		if (!file.exists()) { error(projectNotInitialized); }
+		
+		file = new File(path.concat("src"));
+		if (!file.exists()) { error(projectNotInitialized); }
+		
+		file = new File(path.concat(".classpath"));
+		if (!file.exists()) { error(projectNotInitialized); }
 	}
 
 	public static void createAppPackage(String datPath, String pckg, 
