@@ -77,6 +77,7 @@ public class MVPGenerator {
 		createUtilsPackage(datPath, pckg, app, srcFolder);
 		modifyClasspath(path);
 		createTestPackages(path, packagePath);
+		createResourcesFolder(path);
 	}
 
 	public static boolean endsWithSlash(String path) {
@@ -246,4 +247,11 @@ public class MVPGenerator {
 		for (String s : list) { sb.append(s); }
 		return sb.toString();
 	}
+	
+	public static void createResourcesFolder(String path) {
+		createFolders(new File(path.concat("src\\resources")));
+		
+		System.out.println("--> resources folder created");
+	}
+	
 }
