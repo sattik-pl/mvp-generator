@@ -17,5 +17,4 @@ public final class MyStrings {
 	
 	static String success = "\nMVP generated successfully.\n"
 		.concat("Refresh project: right-click + Refresh or F5.\n");
-
 }
