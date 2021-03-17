@@ -16,5 +16,5 @@ public final class MyStrings {
 	static String notEmptyFolders = "Error: folders are not empty.";
 	
 	static String success = "\nMVP generated successfully.\n"
-		.concat("Refresh project: right-click + Refresh or F5.\n");
+		.concat("Refresh project: File/Refresh or F5.\n");
 }
