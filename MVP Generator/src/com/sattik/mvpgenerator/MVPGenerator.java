@@ -172,9 +172,9 @@ public class MVPGenerator {
 		File dir = new File(srcFolder.concat("\\utils"));
 		String dest = dir.toString();
 		createFolders(dir);
-		generateNewFile(dest, datPath, "\\Utils.java", pckg.concat(".utils;\r\n\r\n")
-				.concat("import javax.swing.JOptionPane;\r\n\r\n"));
+		generateNewFile(dest, datPath, "\\Utils.java", pckg.concat(".utils;\r\n\r\n"));
 		generateNewFile(dest, datPath, "\\Fonts.java", pckg.concat(".utils;\r\n\r\n"));
+		generateNewFile(dest, datPath, "\\Colors.java", pckg.concat(".utils;\r\n\r\n"));
 		generateNewFile(dest, datPath, "\\IOUtils.java", pckg.concat(".utils;\r\n\r\n")
 				.concat("import java.util.List;\r\n")
 				.concat("import java.util.ArrayList;\r\n")
