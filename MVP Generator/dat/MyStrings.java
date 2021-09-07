@@ -5,6 +5,9 @@ public final class MyStrings {
 	public static String menuAbout = "About";
 	public static String version = "ver.";
 	
+	public static final String mouseLeftPath = "/resources/mouse-left.jpg";
+	public static final String mouseRightPath = "/resources/mouse-right.jpg";
+	
 	public static String readingError = "Error while reading file:\n";
 	public static String savingError = "Error while saving file:\n";
 	

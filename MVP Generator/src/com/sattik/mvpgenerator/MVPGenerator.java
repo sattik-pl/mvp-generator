@@ -1,6 +1,10 @@
 package com.sattik.mvpgenerator;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -125,8 +129,9 @@ public class MVPGenerator {
 		File dir = new File(srcFolder.concat("\\model"));
 		String dest = dir.toString();
 		createFolders(dir);
-		generateNewFile(dest, datPath, "\\Model.java", pckg.concat(".model;\r\n\r\n")
-			.concat(addImport(pckg, ".app.Contract;\r\n\r\n")));
+		generateNewFile(dest, datPath, "\\Model.java", 
+			pckg.concat(".model;\r\n\r\n")
+			    .concat(addImport(pckg, ".app.Contract;\r\n\r\n")));
 		
 		System.out.println("--> model package generated");
 	}
@@ -142,12 +147,15 @@ public class MVPGenerator {
 				.concat("import java.awt.event.ActionListener;\r\n\r\n")
 			    .concat(addImport(pckg, ".app.Contract;\r\n"))
 			    .concat(addImport(pckg, ".presenter.Presenter;\r\n\r\n")));
-		generateNewFile(dest, datPath, "\\UIWindow.java", pckg.concat(".view;\r\n\r\n")
+		generateNewFile(dest, datPath, "\\UIWindow.java",
+			pckg.concat(".view;\r\n\r\n")
 				.concat("import javax.swing.JFrame;\r\n")
 				.concat("import javax.swing.JMenu;\r\n")
 				.concat("import javax.swing.JMenuBar;\r\n")
 				.concat("import javax.swing.JMenuItem;\r\n\r\n")
 				.concat(addImportStatic(pckg, ".utils.MyStrings.*;\r\n\r\n")));
+		generateNewFile(dest, datPath, "\\MouseAdapterForToastPanel.java", 
+			pckg.concat(".view;\r\n\r\n"));
 		
 		System.out.println("--> view package generated");
 	}
@@ -176,7 +184,8 @@ public class MVPGenerator {
 		generateNewFile(dest, datPath, "\\Fonts.java", pckg.concat(".utils;\r\n\r\n"));
 		generateNewFile(dest, datPath, "\\Colors.java", pckg.concat(".utils;\r\n\r\n"));
 		generateNewFile(dest, datPath, "\\Toast.java", pckg.concat(".utils;\r\n\r\n"));
-		generateNewFile(dest, datPath, "\\IOUtils.java", pckg.concat(".utils;\r\n\r\n")
+		generateNewFile(dest, datPath, "\\IOUtils.java", 
+			pckg.concat(".utils;\r\n\r\n")
 				.concat("import java.util.List;\r\n")
 				.concat("import java.util.ArrayList;\r\n")
 				.concat("import java.util.Scanner;\r\n\r\n")
@@ -239,7 +248,7 @@ public class MVPGenerator {
 	public static void generateNewFile(String dirPath, String datPath, 
 			String filePath, String pckg) {
 		String contents = 
-				generateContents(readFile(datPath.concat(filePath)), pckg);
+			generateContents(readFile(datPath.concat(filePath)), pckg);
 		saveFile(dirPath.concat(filePath), contents);
 	}
 	
@@ -250,9 +259,25 @@ public class MVPGenerator {
 	}
 	
 	public static void createResourcesFolder(String path) {
-		createFolders(new File(path.concat("src\\resources")));
+		String resourcesPath = path.concat("src\\resources");
+		createFolders(new File(resourcesPath));
 		
 		System.out.println("--> resources folder created");
+		
+		try { Files.copy(Paths.get("images\\mouse-left.jpg"), 
+				Paths.get(resourcesPath.concat("\\mouse-left.jpg")), 
+				StandardCopyOption.REPLACE_EXISTING); }
+		catch (IOException e) { error(copyingError.concat("\"")
+		                                          .concat("mouse-left.jpg")
+		                                          .concat("\".")); }
+		
+		try { Files.copy(Paths.get("images\\mouse-right.jpg"), 
+				Paths.get(resourcesPath.concat("\\mouse-right.jpg")), 
+				StandardCopyOption.REPLACE_EXISTING); }
+		catch (IOException e) { error(copyingError.concat("\"")
+		                                          .concat("mouse-right.jpg")
+		                                          .concat("\".")); }
+		
+		System.out.println("--> images copied");
 	}
-	
 }

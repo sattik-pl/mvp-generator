@@ -27,7 +27,9 @@ public final class Utils {
 	public static List<String> readFile(String name) {
 		List<String> list = new ArrayList<String>();
 		try { list = read(name, new FileReader(name)); }
-		catch (FileNotFoundException e) { error(readingError.concat("\"").concat(name).concat("\".")); }
+		catch (FileNotFoundException e) { error(readingError.concat("\"")
+		                                                    .concat(name)
+		                                                    .concat("\".")); }
 		return list;
 	}
 	
@@ -37,7 +39,9 @@ public final class Utils {
 		List<String> list = new ArrayList<String>();
 		try { list = read(name, new InputStreamReader(new FileInputStream(
 				new File(name)), "UTF-8")); }
-		catch (Exception e) { error(readingError.concat("\"").concat(name).concat("\".")); }
+		catch (Exception e) { error(readingError.concat("\"")
+		                                        .concat(name)
+		                                        .concat("\".")); }
 		return list;
 	}
 	
@@ -47,14 +51,18 @@ public final class Utils {
 		try (BufferedReader br = new BufferedReader(reader)) {
 			while ((line = br.readLine()) != null)
 				list.add(line.concat("\r\n")); }
-		catch (IOException e) { error(readingError.concat("\"").concat(name).concat("\".")); }
+		catch (IOException e) { error(readingError.concat("\"")
+		                                          .concat(name)
+		                                          .concat("\".")); }
 		return list;
 	}
 	
 	public static void saveFile(String name, String contents) {
 		try (PrintWriter pw = new PrintWriter(name)) {
 			pw.print(contents); }
-		catch (Exception e) { error(savingError.concat("\"").concat(name).concat("\".")); }
+		catch (Exception e) { error(savingError.concat("\"")
+		                                       .concat(name)
+		                                       .concat("\".")); }
 	}
 	
 	public static void saveUTF8File(String name, String contents) {
@@ -62,7 +70,9 @@ public final class Utils {
 				new FileOutputStream(name), "UTF-8"))) {
 			bw.write(contents);
 			bw.flush(); }
-		catch (IOException e) { error(savingError.concat("\"").concat(name).concat("\".")); }
+		catch (IOException e) { error(savingError.concat("\"")
+		                                         .concat(name)
+		                                         .concat("\".")); }
 	}
 	
 	public static void error(String error) {

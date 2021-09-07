@@ -12,7 +12,11 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 /*
- * new Toast(someJComponent, "Short message here.", 5);
+ * new Toast(someJComponent, "Short message here.", 5); // timer set for 5 sec.
+ * new Toast(someJComponent, "Short message here.", 0); // without timer
+ * 
+ * without timer used for example with MouseAdapter + mouseEntered(MouseEvent e)
+ *                                                    mouseExited(MouseEvent e)
  */
 
 public class Toast extends JDialog {
@@ -23,6 +27,7 @@ public class Toast extends JDialog {
 	private static final Font toastFont = new Font("Dialog", Font.BOLD, 22);
 
 	public Toast(JComponent caller, String message, int duration) {
+		super();
 		if(spamProtect) { return; }
 		
 		setUndecorated(true);
@@ -46,6 +51,7 @@ public class Toast extends JDialog {
 		setLocation(xcoord, ycoord);
 		setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 30, 30));
 		setVisible(true);
+		if (duration <= 0) { return; } // without timer 
 
 		new Thread() {
 			@Override
