@@ -13,6 +13,8 @@ import javax.swing.JOptionPane;
 public final class Utils {
 	private Utils() { throw new AssertionError(); }
 	
+	public static String separator = FileSystems.getDefault().getSeparator();
+	
 	public static void error(String msg) {
 		JOptionPane.showMessageDialog(null, 
 			msg, "Error", JOptionPane.INFORMATION_MESSAGE);
@@ -22,6 +24,12 @@ public final class Utils {
 		JOptionPane.showMessageDialog(null, 
 			msg, title, JOptionPane.INFORMATION_MESSAGE);		
 	}
+	
+	public static int getCores() {
+		return Runtime.getRuntime().availableProcessors();
+	}
+	
+	public static String getOSName() { return System.getProperty("os.name"); }
 	
 	public static String getDate() {
 		return new SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
@@ -42,11 +50,11 @@ public final class Utils {
 	}
 	
 	public static String pasteFromClipboard() {
-		String s = "";
-		try { s = ((String) Toolkit.getDefaultToolkit()
-			                       .getSystemClipboard()
-			                       .getData(DataFlavor.stringFlavor)); }
-		catch (HeadlessException | UnsupportedFlavorException | IOException e) {}
-		return s;
+		try { return ((String) Toolkit.getDefaultToolkit()
+		                              .getSystemClipboard()
+		                              .getData(DataFlavor.stringFlavor)); }
+		catch (HeadlessException | UnsupportedFlavorException | IOException e) {
+			return "";
+		}
 	}
 }
