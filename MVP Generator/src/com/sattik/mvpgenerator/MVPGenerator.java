@@ -184,6 +184,7 @@ public class MVPGenerator {
 		generateNewFile(dest, datPath, "\\Fonts.java", pckg.concat(".utils;\r\n\r\n"));
 		generateNewFile(dest, datPath, "\\Colors.java", pckg.concat(".utils;\r\n\r\n"));
 		generateNewFile(dest, datPath, "\\Toast.java", pckg.concat(".utils;\r\n\r\n"));
+		generateNewFile(dest, datPath, "\\AnyMethod.java", pckg.concat(".utils;\r\n\r\n"));
 		generateNewFile(dest, datPath, "\\IOUtils.java", 
 			pckg.concat(".utils;\r\n\r\n")
 				.concat("import java.util.List;\r\n")
