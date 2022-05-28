@@ -5,7 +5,7 @@
  * 		new java.util.Timer().schedule(new java.util.TimerTask() {
  * 			@Override
  * 			public void run() { method.apply(); }
- * 	}, 1);
+ * 		}, 1);
  * }
  * 
  * runWithDelay1s(() -> presenter.handle());
